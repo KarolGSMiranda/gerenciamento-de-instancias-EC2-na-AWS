@@ -20,7 +20,7 @@ O Amazon EC2 é o serviço de computação em nuvem sob demanda da AWS. Ele perm
 
 - Amazon EBS (Elastic Block Store): funciona como um disco rígido virtual anexado à instância EC2.
 
-    -Pode ser desconectado e reconectado a outra instância.
+     -Pode ser desconectado e reconectado a outra instância.
 
     - Garante persistência dos dados mesmo após o desligamento da instância.
 
@@ -121,6 +121,7 @@ AMAZON WEB SERVICES. Amazon S3 Documentation. Disponível em: https://docs.aws.a
 . Acesso em: 22 out. 2025.
 
 DIO. Formação AWS Cloud Foundations – Materiais de apoio do curso. Digital Innovation One. 2025.
+
 
 
 
