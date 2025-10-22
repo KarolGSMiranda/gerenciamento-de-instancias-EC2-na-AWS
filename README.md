@@ -50,9 +50,9 @@ O Amazon S3 é um serviço de armazenamento de objetos que permite guardar prati
 
 - Os dados são armazenados em "buckets" (baldes), que funcionam como contêineres de objetos.
 - Cada objeto é composto por:
-  -- Um arquivo (dado).
-  -- Metadados (informações sobre o arquivo).
-  -- Uma chave única (nome).
+    - Um arquivo (dado).
+    - Metadados (informações sobre o arquivo).
+    - Uma chave única (nome).
 - O acesso é feito via interface web, linha de comando (AWS CLI) ou API REST.
 
 ### Classes de Armazenamento
@@ -121,4 +121,5 @@ AMAZON WEB SERVICES. Amazon S3 Documentation. Disponível em: https://docs.aws.a
 . Acesso em: 22 out. 2025.
 
 DIO. Formação AWS Cloud Foundations – Materiais de apoio do curso. Digital Innovation One. 2025.
+
 
