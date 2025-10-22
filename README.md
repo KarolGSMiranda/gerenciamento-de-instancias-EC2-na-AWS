@@ -5,52 +5,92 @@ Este projeto foi desenvolvido como parte do desafio proposto pela DIO, cujo foco
 
 ## Conceitos Teóricos
 
-**EC2 — O servidor na nuvem**
-A Amazon EC2 (Elastic Compute Cloud) é um serviço que permite criar e gerenciar máquinas virtuais na infraestrutura da AWS.
-Na prática, trata-se de um servidor em nuvem que pode hospedar aplicações, processar dados e escalar recursos conforme a demanda.
+**Amazon EC2 (Elastic Compute Cloud)**
 
-Alguns pontos relevantes sobre a EC2:
-- Permite aumentar ou reduzir a capacidade de processamento de acordo com a necessidade;
-- Pode ser integrada com outros serviços da AWS, como armazenamento e banco de dados;
-- Atua como base de muitas arquiteturas em nuvem.
+O Amazon EC2 é o serviço de computação em nuvem sob demanda da AWS. Ele permite criar e gerenciar instâncias virtuais (VMs) para executar aplicações, hospedar sistemas ou processar dados.
 
-**EBS — O armazenamento em bloco**
+### Principais Conceitos
 
-A Amazon EBS (Elastic Block Store) é um serviço de armazenamento em bloco conectado a instâncias EC2.
-Esse tipo de armazenamento é persistente, ou seja, os dados permanecem disponíveis mesmo que a instância seja desligada.
+- Instância EC2: é uma máquina virtual configurável, onde você escolhe sistema operacional, memória, CPU, armazenamento e rede.
+- Imagens (AMIs – Amazon Machine Images): são modelos prontos de sistemas operacionais (como Linux ou Windows) usados para criar novas instâncias.
+- Tipos de instâncias: otimizados para diferentes finalidades — computação, memória, armazenamento ou GPU.
+- Elasticidade: permite aumentar ou reduzir a capacidade de processamento de forma automática ou manual, conforme a demanda.
 
-Entre suas principais características:
-- Possibilidade de criar volumes de diferentes tamanhos conforme a aplicação;
-- Facilidade para anexar e remover volumes;
-- Capacidade de expansão rápida de armazenamento.
+### Armazenamento em EC2
 
-O EBS é amplamente utilizado para armazenar bancos de dados, arquivos de aplicação, registros de sistema e qualquer tipo de dado que necessite de persistência.
+- Amazon EBS (Elastic Block Store): funciona como um disco rígido virtual anexado à instância EC2.
 
-**RDS — O banco de dados gerenciado**
+  -- Pode ser desconectado e reconectado a outra instância.
 
-A Amazon RDS (Relational Database Service) é uma solução que permite criar e gerenciar bancos de dados relacionais sem a necessidade de configurar toda a infraestrutura manualmente.
-A AWS se responsabiliza por tarefas como manutenção, backups e atualizações, oferecendo um ambiente seguro e escalável.
+  -- Garante persistência dos dados mesmo após o desligamento da instância.
 
-Entre seus diferenciais:
-- Suporte a bancos de dados amplamente utilizados, como MySQL, PostgreSQL e Oracle;
-- Facilidade de integração com instâncias EC2;
-- Gerenciamento simplificado, reduzindo a complexidade operacional.
+  -- Suporta snapshots (cópias de segurança).
 
-**S3 — Armazenamento de objetos (complementar)**
+- Instance Store: armazenamento temporário, usado apenas enquanto a instância está ativa (os dados são perdidos quando ela é desligada).
 
-Embora não esteja presente no diagrama principal, é importante mencionar a Amazon S3 (Simple Storage Service).
-Diferentemente do EBS, que trabalha com blocos, o S3 utiliza o armazenamento em objetos, sendo ideal para grandes volumes de dados estáticos, como imagens, vídeos e backups.
+### Gerenciamento e Segurança
 
-Entre suas vantagens:
-- Armazenamento escalável e seguro;
-- Diferentes classes de armazenamento para otimizar custos;
-- Integração com diversas aplicações e serviços AWS.
+- Security Groups: atuam como firewall virtual, controlando o tráfego de entrada e saída da instância.
+- Chaves SSH ou senhas: utilizadas para acessar instâncias com segurança.
+- Auto Scaling: ajusta automaticamente o número de instâncias conforme a carga.
+- Elastic Load Balancer (ELB): distribui o tráfego entre múltiplas instâncias para garantir alta disponibilidade.
 
-**Usuário — O ponto inicial**
+### Casos de Uso
 
-O usuário representa o início de todo o fluxo dentro de uma arquitetura em nuvem.
-Através de uma aplicação hospedada na EC2, ele pode enviar arquivos, interagir com dados ou executar processos que envolvam EBS, RDS e outros serviços.
-Essa interação é o elemento central que conecta a experiência prática ao funcionamento técnico da infraestrutura.
+- Hospedagem de sites e APIs.
+- Execução de aplicações empresariais.
+- Ambientes de teste e desenvolvimento.
+- Processamento de dados em larga escala (big data e machine learning).
+
+## Amazon S3 (Simple Storage Service)
+
+O Amazon S3 é um serviço de armazenamento de objetos que permite guardar praticamente qualquer tipo de dado de forma escalável, segura e acessível pela internet.
+
+### Como Funciona
+
+- Os dados são armazenados em "buckets" (baldes), que funcionam como contêineres de objetos.
+- Cada objeto é composto por:
+  -- Um arquivo (dado).
+  -- Metadados (informações sobre o arquivo).
+  -- Uma chave única (nome).
+- O acesso é feito via interface web, linha de comando (AWS CLI) ou API REST.
+
+### Classes de Armazenamento
+
+Cada classe tem um custo e um desempenho diferentes, adequando-se ao tipo de dado:
+
+- S3 Standard → alta durabilidade e disponibilidade; ideal para dados acessados com frequência.
+- S3 Standard-IA (Infrequent Access) → menor custo para dados acessados ocasionalmente.
+- S3 One Zone-IA → mais barato, mas armazenado em uma única zona de disponibilidade.
+- S3 Glacier → armazenamento de baixo custo para arquivamento e backup de longo prazo.
+- S3 Glacier Deep Archive → ainda mais econômico, usado para dados raramente acessados.
+
+### Gerenciamento e Otimização
+
+- Lifecycle Rules: automatizam a movimentação de objetos entre classes de armazenamento (por exemplo, mover arquivos antigos para Glacier).
+- Versionamento: permite manter várias versões de um mesmo objeto, útil para recuperação de dados.
+- Replication: copia objetos automaticamente entre regiões (para redundância e backup).
+- Encryption: os dados podem ser criptografados em repouso (no S3) e em trânsito (via HTTPS).
+
+### Segurança e Controle
+
+- IAM Policies e Bucket Policies controlam quem pode acessar ou modificar objetos.
+- Access Control Lists (ACLs) permitem definir permissões individuais por objeto.
+- Logs de acesso e auditoria podem ser ativados para rastrear operações.
+
+### Casos de Uso
+
+- Armazenamento de backups e logs de sistemas.
+- Hospedagem de sites estáticos.
+- Repositório para dados de análise, machine learning e big data.
+- Armazenamento e distribuição de conteúdos multimídia (imagens, vídeos, PDFs etc.).
+
+## Integração EC2 + S3
+
+Esses dois serviços se complementam:
+- Instâncias EC2 processam dados e armazenam resultados no S3.
+- Logs e backups de EC2 podem ser enviados automaticamente ao S3.
+- O S3 serve como base de dados para aplicações hospedadas em EC2, permitindo alta escalabilidade e baixo custo.
 
 ## Representação Arquitetural no Diagrama
 
@@ -81,3 +121,4 @@ AMAZON WEB SERVICES. Amazon S3 Documentation. Disponível em: https://docs.aws.a
 . Acesso em: 22 out. 2025.
 
 DIO. Formação AWS Cloud Foundations – Materiais de apoio do curso. Digital Innovation One. 2025.
+
